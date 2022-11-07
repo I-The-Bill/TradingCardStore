@@ -45,4 +45,11 @@ public class VanguardService
 		
 		return false;
 	}
+
+//	public List<VanguardCard> findByCostGreaterThen(double cost)
+//	{
+//		return vgr.findByCostGreaterThen();
+//	}
+	
+
 }

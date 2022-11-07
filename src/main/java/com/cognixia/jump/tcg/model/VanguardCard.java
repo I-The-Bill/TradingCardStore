@@ -49,7 +49,7 @@ public class VanguardCard implements Serializable
 	//private String skill;
 	
 	@Column(nullable = false)
-	private Double cost;
+	private double cost;
 	
 	@Column(nullable = false)
 	@Range(min = 0)
@@ -72,7 +72,7 @@ public class VanguardCard implements Serializable
 	
 		
 	public VanguardCard(Long id, String setId, String name, String clan_Nation, @Range(min = 0, max = 5) int grade,
-			@Range(min = 0) int power, @Range(min = 0) int shield, String skill, @Range(min = 0) Double cost,
+			@Range(min = 0) int power, @Range(min = 0) int shield, String skill, @Range(min = 0) double cost,
 			@Range(min = 0) int inventoryCount) {
 		super();
 		this.id = id;
@@ -151,11 +151,11 @@ public class VanguardCard implements Serializable
 //		this.skill = skill;
 //	}
 
-	public Double getCost() {
+	public double getCost() {
 		return cost;
 	}
 
-	public void setCost(Double cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 
