@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.tcg.exceptions.AddressNotFoundException;
+import com.cognixia.jump.tcg.exceptions.ResourceAlreadyExistException;
 import com.cognixia.jump.tcg.exceptions.ResourceNotFoundException;
 import com.cognixia.jump.tcg.model.Address;
 import com.cognixia.jump.tcg.model.User;
@@ -55,8 +56,13 @@ public class UserController
 	}
 	
 	@PostMapping("/users/user")
-	public ResponseEntity<?> createUser(@RequestBody User user)
+	public ResponseEntity<?> createUser(@RequestBody User user) throws ResourceAlreadyExistException
 	{
+		Optional<User> isExistingUser = ur.findByUsername(user.getUsername());
+		if(!isExistingUser.isEmpty())
+		{
+			throw new ResourceAlreadyExistException("User with username " + user.getUsername() + " already exist");
+		}
 		user.setId(null);
 		user.setPassword(encoder.encode(user.getPassword())); //ensures each new users password gets encoded
 		User made = ur.save(user);
@@ -117,7 +123,7 @@ public class UserController
 		@PutMapping("/users/addaddress")
 		public ResponseEntity<?> addStudent(@RequestBody UserAndAddressReqModel model) throws ResourceNotFoundException 
 		{
-			if (us.joinUserAndsAddress(model.getAddressId(), model.getUserId())) 
+			if (us.addAddressToUser(model.getAddressId(), model.getUserId())) 
 			{
 				return new ResponseEntity<>("updated User", HttpStatus.CREATED);
 			}

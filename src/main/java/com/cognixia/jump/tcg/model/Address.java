@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 
 @Entity
@@ -51,7 +54,8 @@ public class Address implements Serializable
 	@Column(nullable = false, length = 30)
 	private String country;
 	
-	//Link for the 1 to many of users
+	//Link for the 1 to many of users\
+	@JsonIgnoreProperties("address")
 	@OneToMany(mappedBy = "address", targetEntity = User.class)
 	private Set<User> users = new HashSet<>();
 	

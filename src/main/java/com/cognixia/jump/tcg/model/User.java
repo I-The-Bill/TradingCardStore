@@ -36,6 +36,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // incrementation will use auto_increment
+	@Column(name = "user_id")
 	private Long id;
 
 	@Column(unique = true, nullable = false)
