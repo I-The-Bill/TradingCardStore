@@ -16,5 +16,5 @@ public interface UserRepository extends JpaRepository<User, Long>
 	//importen for sedcurity, security will only know how to find user by username
 	//
 	
-	public Optional<User> findByUsername(String username);
+	public Optional<User> findByUsername(String username); 
 }

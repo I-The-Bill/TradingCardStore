@@ -58,79 +58,48 @@ public class UserService {
 	}
 	
 	
-	public boolean joinUserAndsAddress(Long addressId, Long UserId) throws ResourceNotFoundException {
-			
-			Optional<Address> addressAdd = ar.findById(addressId);
-			Optional<User> UserAdd = ur.findById(UserId);
-			
-			if (addressAdd.isPresent() && UserAdd.isPresent()) 
-			{
-				addAddressToUser(addressId,UserId);
-				addUserToAddress(addressId,UserId);
-				return true;
-			}
-//			else if(addressAdd.isPresent())
+//	public boolean joinUserAndAddress(Long addressId, Long UserId) throws ResourceNotFoundException {
+//			
+//			Optional<Address> addressAdd = ar.findById(addressId);
+//			Optional<User> UserAdd = ur.findById(UserId);
+//			
+//			if (addressAdd.isPresent() && UserAdd.isPresent()) 
 //			{
-//				throw new ResourceNotFoundException("Address is Present");
+//				addAddressToUser(addressId,UserId);
+//				addUserToAddress(addressId,UserId);
+//				return true;
 //			}
-//			else if(UserAdd.isPresent())
+////			else if(addressAdd.isPresent())
+////			{
+////				throw new ResourceNotFoundException("Address is Present");
+////			}
+////			else if(UserAdd.isPresent())
+////			{
+////				throw new ResourceNotFoundException("User is Present");
+////			}
+//			else 
 //			{
-//				throw new ResourceNotFoundException("User is Present");
+//				return false;
 //			}
-			else 
-			{
-				return false;
-			}
-	}
-	
-	public boolean addAddressToUser(Long addressId, Long UserId) throws ResourceNotFoundException {
+//	}
+//	
+	public boolean addAddressToUser(Long addressId, Long UserId)  {
 		
 		Optional<Address> addressAdd = ar.findById(addressId);
 		Optional<User> UserAdd = ur.findById(UserId);
-		
-		if (addressAdd.isPresent() && UserAdd.isPresent()) 
-		{
-			
-			//addressAdd.get().addUser(UserAdd.get());
-			UserAdd.get().setAddress(addressAdd.get());
-			
-			//ar.save(addressAdd.get());
-			ur.save(UserAdd.get());
-			
-			return true;
-		}
-//		else if(addressAdd.isPresent())
-//		{
-//			throw new ResourceNotFoundException("Address is Present");
-//		}
-//		else if(UserAdd.isPresent())
-//		{
-//			throw new ResourceNotFoundException("User is Present");
-//		}
-		else 
-		{
-			return false;
-		}
-		
-		//return false;
-	}
 	
-	public boolean addUserToAddress(Long addressId, Long UserId) throws ResourceNotFoundException {
-		
-		Optional<Address> addressAdd = ar.findById(addressId);
-		Optional<User> UserAdd = ur.findById(UserId);
-		
 		if (addressAdd.isPresent() && UserAdd.isPresent()) 
 		{
 			
 			addressAdd.get().addUser(UserAdd.get());
-			//UserAdd.get().setAddress(addressAdd.get());
+			UserAdd.get().setAddress(addressAdd.get());
 			
 			ar.save(addressAdd.get());
-			//ur.save(UserAdd.get());
+			ur.save(UserAdd.get());
 			
 			return true;
 		}
+		return false;
 //		else if(addressAdd.isPresent())
 //		{
 //			throw new ResourceNotFoundException("Address is Present");
@@ -139,13 +108,45 @@ public class UserService {
 //		{
 //			throw new ResourceNotFoundException("User is Present");
 //		}
-		else 
-		{
-			return false;
-		}
+//		else 
+//		{
+//			
+//		}
 		
 		//return false;
 	}
+	
+//	public boolean addUserToAddress(Long addressId, Long UserId) throws ResourceNotFoundException {
+//		
+//		Optional<Address> addressAdd = ar.findById(addressId);
+//		Optional<User> UserAdd = ur.findById(UserId);
+//		
+//		if (addressAdd.isPresent() && UserAdd.isPresent()) 
+//		{
+//			
+//			addressAdd.get().addUser(UserAdd.get());
+//			//UserAdd.get().setAddress(addressAdd.get());
+//			
+//			ar.save(addressAdd.get());
+//			//ur.save(UserAdd.get());
+//			
+//			return true;
+//		}
+////		else if(addressAdd.isPresent())
+////		{
+////			throw new ResourceNotFoundException("Address is Present");
+////		}
+////		else if(UserAdd.isPresent())
+////		{
+////			throw new ResourceNotFoundException("User is Present");
+////		}
+//		else 
+//		{
+//			return false;
+//		}
+//		
+//		//return false;
+//	}
 
 
 	public boolean deleteUserByName(String username) {

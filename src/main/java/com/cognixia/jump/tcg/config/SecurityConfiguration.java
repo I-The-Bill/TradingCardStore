@@ -43,10 +43,12 @@ public class SecurityConfiguration
 		http.csrf().disable()
 				   .authorizeRequests()
 				   .antMatchers(HttpMethod.GET, "/api/hello").permitAll()
-				   .antMatchers(HttpMethod.POST, "/api/users/*").permitAll()//allows all users including non logged in users to access this uri
-				   .antMatchers(HttpMethod.GET, "/api*").hasRole("ADMIN")
+				   .antMatchers("/api/users/*").permitAll()//allows all users including non logged in users to access this uri
+				   .antMatchers("/api/admin/*").hasRole("ADMIN")
+				   .antMatchers(HttpMethod.POST,"/api/admin/vanguard/add").hasRole("ADMIN")
 				   .antMatchers(HttpMethod.GET, "/api/testing").permitAll()
 				   .antMatchers("/api/authenticate").permitAll()
+				   .antMatchers(HttpMethod.GET, "/v3/api-docs/").permitAll()
 				   .anyRequest().authenticated()  //this chunck makes it so some login is needed to access any APIS
 				   .and()
 				   .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ); // tell spring security to NOT create sessions
