@@ -1,6 +1,7 @@
 package com.cognixia.jump.tcg.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -40,23 +41,38 @@ public class VanguardCard implements Serializable
 	@Range(min = 0)
 	private int power;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	@Range(min = 0)
 	private int shield;
 	
-	@Column(nullable = false)
-	private String skill;
+	//@Column(nullable = true,length =1500)
+	//private String skill;
 	
 	@Column(nullable = false)
-	@Range(min = (long) 0.01)
-	private long cost;
+	private Double cost;
 	
 	@Column(nullable = false)
 	@Range(min = 0)
 	private int inventoryCount;
 
+	public VanguardCard()
+	{
+		super();
+		this.id = 0L;
+		this.setId = "0000";
+		this.name = "N/A";
+		this.clan_Nation = "N/A";
+		this.grade = 0;
+		this.power = 0;
+		this.shield = 0;
+		//this.skill = "";
+		this.cost = 0.0;
+		this.inventoryCount = 0;
+	}
+	
+		
 	public VanguardCard(Long id, String setId, String name, String clan_Nation, @Range(min = 0, max = 5) int grade,
-			@Range(min = 0) int power, @Range(min = 0) int shield, String skill, @Range(min = 0) long cost,
+			@Range(min = 0) int power, @Range(min = 0) int shield, String skill, @Range(min = 0) Double cost,
 			@Range(min = 0) int inventoryCount) {
 		super();
 		this.id = id;
@@ -66,7 +82,7 @@ public class VanguardCard implements Serializable
 		this.grade = grade;
 		this.power = power;
 		this.shield = shield;
-		this.skill = skill;
+		//this.skill = skill;
 		this.cost = cost;
 		this.inventoryCount = inventoryCount;
 	}
@@ -127,19 +143,19 @@ public class VanguardCard implements Serializable
 		this.shield = shield;
 	}
 
-	public String getSkill() {
-		return skill;
-	}
+//	public String getSkill() {
+//		return skill;
+//	}
+//
+//	public void setSkill(String skill) {
+//		this.skill = skill;
+//	}
 
-	public void setSkill(String skill) {
-		this.skill = skill;
-	}
-
-	public long getCost() {
+	public Double getCost() {
 		return cost;
 	}
 
-	public void setCost(long cost) {
+	public void setCost(Double cost) {
 		this.cost = cost;
 	}
 
@@ -153,7 +169,7 @@ public class VanguardCard implements Serializable
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(clan_Nation, cost, grade, id, inventoryCount, name, power, setId, shield, skill);
+		return Objects.hash(clan_Nation, cost, grade, id, inventoryCount, name, power, setId, shield);
 	}
 
 	@Override
@@ -168,13 +184,13 @@ public class VanguardCard implements Serializable
 		return Objects.equals(clan_Nation, other.clan_Nation) && cost == other.cost && grade == other.grade
 				&& Objects.equals(id, other.id) && inventoryCount == other.inventoryCount
 				&& Objects.equals(name, other.name) && power == other.power && Objects.equals(setId, other.setId)
-				&& shield == other.shield && Objects.equals(skill, other.skill);
+				&& shield == other.shield;// && Objects.equals(skill, other.skill);
 	}
 
 	@Override
 	public String toString() {
 		return "VanguardCard [id=" + id + ", setId=" + setId + ", name=" + name + ", clan_Nation=" + clan_Nation
-				+ ", grade=" + grade + ", power=" + power + ", shield=" + shield + ", skill=" + skill + ", cost=" + cost
+				+ ", grade=" + grade + ", power=" + power + ", shield=" + shield + ", cost=" + cost
 				+ ", inventoryCount=" + inventoryCount + "]";
 	}
 
@@ -183,5 +199,43 @@ public class VanguardCard implements Serializable
 //	private Address address;
 	
 	
+//    "id": 1,
+//    "setId": "V-BT04",
+//    "name": "Fantasy Petal Storm, Shirayuki",
+//    "clan_Nation": "Murakumo",
+//    "grade": 3,
+//    "power": 12000,
+//    "shield": 0,
+//    "cost": 0,
+//    "inventoryCount": 17
 	
+//    "id": 2,
+//    "setId": "V-TD01/004",
+//    "name": "Blaster Blade",
+//    "clan_Nation": "Royal Paladin",
+//    "grade": 2,
+//    "power": 10000,
+//    "shield": 5000,
+//    "cost": 0,
+//    "inventoryCount": 20
+	
+//    "id": 4,
+//    "setId": "V-TD01/005EN",
+//    "name": "Blaster Blade",
+//    "clan_Nation": "Royal Paladin",
+//    "grade": 2,
+//    "power": 10000,
+//    "shield": 5000,
+//    "cost": 0.48,
+//    "inventoryCount": 20
+	
+//	   "id": 2,
+//	   "setId": "D-BT06/FFR01EN",
+//	   "name": "Chakrabarthi Phoenix Dragon, Nirvana Jheva",
+//	   "clan_Nation": "Dragon Empire",
+//	   "grade": 3,
+//	   "power": 13000,
+//	   "shield": 0,
+//	   "cost": 95.0,
+//	   "inventoryCount": 19
 }
